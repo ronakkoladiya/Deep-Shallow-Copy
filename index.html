@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep & Shallow Copy</title>
+
+    <!-- css link -->
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- shallowcopy start -->
+
+        <div class="mainbox left">
+            <h1 class="text-center">SHALLOW COPY</h1>
+            <div class="textbox tb1">
+                <b>1) </b>CHANGE NAME OF NORMAL COPY: <input type="text" id="shallowname">
+                <button id="shallowsubmit" onclick="changeShallow()">SUBMIT</button>
+            </div>
+            <div class="textbox tb2">
+                <b>2) </b>CHANGE NAME OF SPREAD COPY: <input type="text" id="spreadname">
+                <button id="shallowsubmit" onclick="changeSpreadName()">SUBMIT</button>
+            </div>
+            <div class="textbox tb3">
+                <b>3) </b>CHANGE CITY OF SPREAD COPY: <input type="text" id="spreadcity">
+                <button id="shallowsubmit" onclick="changeSpreadCity()">SUBMIT</button>
+            </div>
+            <div class="data">
+                <div class="original">
+                    <h2>ORIGINAL DATA</h2>
+                    NAME: <span id="shalloworiginalname"></span><br>
+                    EMAIL: <span id="shalloworiginalemail"></span><br>
+                    NUMBER: <span id="shalloworiginalnumber"></span><br>
+                    CITY: <span id="shalloworiginalcity"></span><br>
+                    STATE: <span id="shalloworiginalstate"></span>
+                </div>
+                <div class="copy">
+                    <h2>NORMAL COPY</h2>
+                    NAME: <span id="shallowcopyname"></span><br>
+                    EMAIL: <span id="shallowcopyemail"></span><br>
+                    NUMBER: <span id="shallowcopynumber"></span><br>
+                    CITY: <span id="shallowcopycity"></span><br>
+                    STATE: <span id="shallowcopystate"></span>
+                </div>
+                <div class="copy">
+                    <h2>SPREAD COPY</h2>
+                    NAME: <span id="shallowspreadname"></span><br>
+                    EMAIL: <span id="shallowspreademail"></span><br>
+                    NUMBER: <span id="shallowspreadnumber"></span><br>
+                    CITY: <span id="shallowspreadcity"></span><br>
+                    STATE: <span id="shallowspreadstate"></span>
+                </div>
+            </div>
+            <div class="objstructure">
+                <div>
+                    <p><b>let originalobj = {</b><br><span class="ms10">name: 'Ronak Koladiya',</span><br><span class="ms10">email: 'ronak@info.com',</span><br><span class="ms10">number: '9087645673'</span><br><span class="ms10">address:{</span><br><span class="ms20">city: 'Surat', </span><br><span class="ms20">state: 'Gujarat' </span><br> <span class="ms10">}</span> <br><b><span>};</span></b></p>
+                </div>
+                <div>
+                    <p><b>let copyobj = originalobj;</b></p>
+                </div>
+                <div>
+                    <p><b>let spreadobj = {...originalobj};</b></p>
+                </div>
+            </div>
+            <div class="explain">
+                <h2 class="text-center">EXPLANATION</h2>
+                
+                <p><b>1) </b>In this part we have one <b>original object</b> set with name, email, number and address, Now we copied one object on which we have just assign a direct values of original object directly <b>like:(copyobj = originalobj)</b> now after entering text in <b>first input type</b> when user clicks on submit we just changed the value of <b>normal copy's name</b> but as mentioned we directly assigned a value to the copied object because of that it creates the shallow copy of original object that means if we change only copied object value it also changes the value of <b>original object as well.</b></p>
+                
+                <p><b>2) </b>We created a new object and assigned the value with <b>spread operator</b> as show above <b>like:(spreadobj = {...originalobj})</b> now on <b>second input type</b> we are changing the <b>name's value of spread copy</b> object if user clicks on submit after entering the data in second input type, In spread copy it won't change the name because its a part of <b>main data in object</b> its only changes spread copy's name its <b>kinda work like deep copy</b> but only till some stage we gonna learn next stage in next example.</p>
+
+                <p style="padding-bottom: 100px;"><b>3) </b>Now we added a <b>sub data in object</b> with address there we have <b>city and state</b>, Now we gonna change the <b>city's value</b> on click of third input type submit, after entering value and submitting we can see that <b>it changes all values of city</b> because now the city is under the <b>sub category of object</b> the assigned value of spread object is only <b>gonna work till main category of object</b> after that it also creates the shallow copy of sub data.</p>
+            </div>
+        </div>
+
+        <!-- shallowcopy end -->
+
+        <!-- deepcopy start -->
+
+        <div class="mainbox right">
+            <h1 class="text-center">DEEP COPY</h1>
+            <div class="textbox tb1 tb3">
+                CHANGE NAME OF COPY: <input type="text" id="deepname">
+                <button id="deepsubmit" onclick="changeDeep()">SUBMIT</button>
+            </div>
+            <div class="data">
+                <div class="original">
+                    <h2>ORIGINAL DATA</h2>
+                    NAME: <span id="deeporiginalname"></span> <br>
+                    EMAIL: <span id="deeporiginalemail"></span><br>
+                    NUMBER: <span id="deeporiginalnumber"></span>
+                </div>
+                <div class="copy">
+                    <h2>COPY DATA</h2>
+                    NAME: <span id="deepcopyname"></span> <br>
+                    EMAIL: <span id="deepcopyemail"></span><br>
+                    NUMBER: <span id="deepcopynumber"></span>
+                </div>
+            </div>
+            <div class="objstructure">
+                <div>
+                    <p><b>let originalobj = {</b><br><span class="ms10">name: 'Ronak Koladiya',</span><br><span class="ms10">email: 'ronak@info.com',</span><br><span class="ms10">number: '9087645673'</span><br><span>}</span></b></p>
+                </div>
+                <div>
+                    <p><b>let copyobj = JSON.parse(<br><span class="ms10">JSON.stringify(originalobj)</span><br>);</b></p>
+                </div>
+            </div>
+            <div class="explain">
+                <h2 class="text-center">EXPLANATION</h2>
+                
+                <p><b>1) </b>In this part we have one <b>original object</b> set with name, email and number and we copied one object on which we have assign values of original object on this with <b>json parse and stringify</b> <b>like:(copyobj = JSON.parse(JSON.stringify(originalobj)))</b> now after entering text in <b>first input type</b> when user clicks on submit we just changed the value of <b>copied object's name</b> but now because of json parse and json stringify it creates <b>the deep copy</b> of the original object and only changes <b>copied objects name</b> even if its anywhere in copied object either on a <b> main category of data or on a sub category of data</b> it changes only copied object data with following json method.</p>
+            </div>
+        </div>
+
+        <!-- deepcopy end -->
+
+    </div>
+
+    <!-- js link -->
+    <script src="js/script.js"></script>
+    
+</body>
+</html>
